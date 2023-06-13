@@ -36,48 +36,40 @@ function App() {
 
   return (
     <div className={`app ${isDarkMode ? "dark-mode" : ""}`}>
-      <div className="toggle-mode-container">
-        <button className="toggle-mode-button" onClick={handleToggleDarkMode}>
-          <img
-            src={isDarkMode ? "/moon.png" : "/sun.png"}
-            alt={isDarkMode ? "Moon" : "Sun"}
-            className="mode-image"
-          />
-        </button>
-      </div>
-      <div className="todo-list-container">
-        <h1>Todo List</h1>
-        <form onSubmit={handleFormSubmit}>
-          <input
-            type="text"
-            value={newTodo}
-            onChange={handleInputChange}
-            placeholder="Enter a new todo"
-          />
-          <button type="submit">Add</button>
-        </form>
-        <ul>
-          {todos.map((todo, index) => (
-            <li key={index} className={todo.completed ? "completed" : ""}>
-              <div>
-                <button
-                  className="complete-button"
-                  onClick={() => handleTodoToggleComplete(index)}
-                >
-                  {todo.completed ? "Undo" : "Complete"}
-                </button>
-                <button
-                  className="delete-button"
-                  onClick={() => handleTodoDelete(index)}
-                >
-                  Delete
-                </button>
-              </div>
-              {todo.text}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h1>Todo List</h1>
+      <form onSubmit={handleFormSubmit}>
+        <input
+          type="text"
+          value={newTodo}
+          onChange={handleInputChange}
+          placeholder="Enter a new todo"
+        />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index} className={todo.completed ? "completed" : ""}>
+            {todo.text}
+            <div>
+              <button
+                className="complete-button"
+                onClick={() => handleTodoToggleComplete(index)}
+              >
+                {todo.completed ? "Undo" : "Complete"}
+              </button>
+              <button
+                className="delete-button"
+                onClick={() => handleTodoDelete(index)}
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <button className="toggle-mode-button" onClick={handleToggleDarkMode}>
+        {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      </button>
     </div>
   );
 }
